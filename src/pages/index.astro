@@ -4,36 +4,130 @@ import { SITE_TITLE, url } from "../config";
 ---
 
 <BaseLayout sideBarActiveItemID="home">
-    <div class="pb-12 mt-5">
-        <img src={url('favicon.svg')} alt="" class="w-24 h-24 mb-2" />
-        <div class="text-xl py-1">你好</div>
-        <div class="text-5xl font-bold hidden">我是 {SITE_TITLE}</div>
-        <div class="text-xl py-6">
-            欢迎访问我的个人网站. <br />
-            欢迎随意浏览，了解更多关于我的信息!
+    <!-- 顶部欢迎区 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🌱 欢迎来到我的小家</h1>
+            <p class="subtitle">
+                互联网工程师 × 双职工宝妈 × 4岁小宝贝的日常角落
+            </p>
+            <p class="description">
+                在这里，我记录生活中的小确幸：<br>
+                自制面包的香气、健身后的舒畅、和宝贝相处的温暖，<br>
+                以及作为一个普通人努力平衡工作与家庭的点滴。
+            </p>
+            <div class="hero-buttons">
+                <a href="/blog" class="btn-primary">浏览最新文章</a>
+                <a href="/about" class="btn-secondary">了解关于我</a>
+            </div>
         </div>
+    </section>
 
-        <div class="mt-8 space-y-3">
-            <div class="text-2xl font-bold">Font sample</div>
-            <div class="text-lg">
-                <span class="font-bold">EN:</span> The quick brown fox jumps over the lazy dog. 0123456789
+    <!-- 关于我简版 -->
+    <section class="about">
+        <h2>关于我</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>大家好，我是一个普通的双职工宝妈，也是一枚互联网工程师，家里有个活泼可爱的4岁小宝贝。</p>
+                <p>白天忙工作，晚上回家就是一家四口的温暖小日子。我喜欢周末在厨房尝试自制面包和蛋糕，看着家人吃得开心就觉得满足。健身则是我保持精力的方式，让我在工作和带娃中还能照顾好自己。</p>
+                <p>生活里的我并不完美，也常常手忙脚乱，但我一直在努力寻找平衡：用心工作、享受家庭，同时把日子过得更从容。</p>
+                <p><strong>很高兴在这里遇见你</strong>，希望我们都能把普通日子过成喜欢的样子。</p>
             </div>
-            <div class="text-lg">
-                <span class="font-bold">简体:</span> 春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。
+            <!-- 建议在这里放一张个人照片 -->
+            <img src="/images/me.jpg" alt="我的生活照" class="about-image" />
+        </div>
+    </section>
+
+    <!-- 最新分享 -->
+    <section class="latest">
+        <h2>最新分享</h2>
+        <div class="articles-grid">
+            <!-- 这里可以动态渲染文章，或者先手动放几篇示例 -->
+            <div class="article-card">
+                <img src="/images/bread.jpg" alt="自制面包" />
+                <h3>周末尝试了新配方香蕉面包</h3>
+                <p>4岁宝贝抢着吃，分享详细做法～</p>
+                <a href="#">阅读更多 →</a>
             </div>
-            <div class="text-lg">
-                <span class="font-bold">繁體:</span> 人生若只如初見，何事秋風悲畫扇。
-            </div>
-            <div class="text-lg">
-                <span class="font-bold">日本語:</span> いろはにほへと ちりぬるを — 吾輩は猫である。名前はまだ無い。
-            </div>
-            <div class="text-lg">
-                <span class="font-bold">한국어:</span> 다람쥐 헌 쳇바퀴에 타고파. 동해 물과 백두산이.
-            </div>
-            <div class="text-lg pt-6">
-                2026 年 4 月，用 Astro v4.0 搭配 HarmonyOS Sans SC 与 Nunito Variable，实现 CJK + Latin 无缝 fallback —— 只要 <code>@font-face</code> 不用 <code>local()</code>。
-                <code># 代码块字体使用 maple-mono-cn</code>
+
+            <div class="article-card">
+                <img src="/images/fitness.jpg" alt="健身" />
+                <h3>双职工宝妈的健身坚持记录</h3>
+                <p>如何在忙碌中找到属于自己的运动时间</p>
+                <a href="#">阅读更多 →</a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- 生活小模块 -->
+    <section class="moments">
+        <h2>最近在过的小日子</h2>
+        <div class="moments-grid">
+            <div class="moment-card">
+                <h3>正在尝试</h3>
+                <p>新面包配方 + 本月健身小目标</p>
+            </div>
+            <div class="moment-card">
+                <h3>一句心情</h3>
+                <p>“生活不需要完美，只要有爱、有温度，就已经很好了。”</p>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .hero {
+        text-align: center;
+        padding: 6rem 2rem;
+        background: linear-gradient(to bottom, #f8f4eb, #e8f0e0);
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .subtitle { font-size: 1.4rem; color: #666; margin-bottom: 1.5rem; }
+    .hero-buttons {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .btn-primary, .btn-secondary {
+        padding: 0.8rem 2rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .btn-primary { background: #4a8f5e; color: white; }
+    .btn-secondary { border: 2px solid #4a8f5e; color: #4a8f5e; }
+
+    .about {
+        padding: 4rem 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+    .about-image {
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    .latest, .moments {
+        padding: 4rem 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    .article-card {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+</style>
