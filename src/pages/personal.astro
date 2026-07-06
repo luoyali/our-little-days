@@ -1,8 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import TimeLineElement from "../components/cv/TimeLine.astro";
 import { Image } from "astro:assets";
 import { AUTHOR_INITIAL, url } from "src/config";
+
+const aboutTags = ["双职工宝妈", "4岁小宝贝", "攒钱生活", "周末烘焙", "坚持健身"];
+
+const aboutParagraphs = [
+    "大家好，我是一个普通的双职工宝妈，家里有个活泼可爱的4岁小宝贝。",
+    "白天我和先生各自忙工作，晚上回家就是一家四口的温暖小日子。我特别喜欢攒钱，喜欢把日子过得更从容，也喜欢周末在厨房尝试自制面包和蛋糕，看着家人吃得开心就觉得满足。健身则是我保持精力的方式，让我在工作和带娃中还能照顾好自己。",
+    "生活里的我并不完美，也常常手忙脚乱，但我一直在努力平衡：努力工作、用心攒钱，同时享受当下的烟火气。",
+    "很高兴在这里遇见你，希望我们都能把普通日子过成喜欢的样子。",
+];
 ---
 
 <BaseLayout
@@ -20,29 +28,49 @@ import { AUTHOR_INITIAL, url } from "src/config";
             alt="icon"
         />
     </div> -->
-    <div class="w-[10rem] mt-5 mb-6">
-        <Image
-            class="fill-current rounded-ac-md"
-            format="webp"
-            width={300}
-            height={300}
-            src={url('favicon.svg')}
-            alt="icon"
-        />
-    </div>
-    <div class="mb-5">
-        <div class="text-3xl w-full font-bold">About Me</div>
-    </div>
+    <section class="mt-5 mb-12">
+        <div class="flex flex-col gap-6 md:flex-row md:items-center">
+            <div class="w-28 shrink-0 md:w-36">
+                <Image
+                    class="fill-current rounded-ac-lg shadow-ac"
+                    format="webp"
+                    width={300}
+                    height={300}
+                    src={url('favicon.svg')}
+                    alt="个人头像"
+                />
+            </div>
 
-    <div class="mb-10 text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-    </div>
+            <div class="grow">
+                <div class="mb-4">
+                    <div class="text-3xl w-full font-bold">关于我</div>
+                    <div class="mt-2 h-1 w-20 rounded-full bg-ac-primary"></div>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    {
+                        aboutTags.map((tag) => (
+                            <span class="badge badge-outline border-ac-primary text-ac-text">
+                                {tag}
+                            </span>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 rounded-ac-lg bg-base-100 p-6 shadow-ac border-l-4 border-ac-primary md:p-8">
+            <div class="grid gap-5 text-base leading-8 text-ac-text md:text-lg">
+                {
+                    aboutParagraphs.map((paragraph, index) => (
+                        <p class={index === aboutParagraphs.length - 1 ? "font-bold" : ""}>
+                            {paragraph}
+                        </p>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
 
     <!-- <div class="mb-5">
         <div class="text-3xl w-full font-bold">Education</div>
