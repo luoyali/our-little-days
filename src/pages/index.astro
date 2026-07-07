@@ -1,133 +1,653 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE_TITLE, url } from "../config";
+import { url } from "../config";
+import "@fontsource-variable/noto-serif-sc";
+
+const columns = [
+    {
+        icon: "photos.png",
+        title: "厨房与餐桌",
+        label: "Food Notes",
+        text: "记录面包、蛋糕、家常饭，以及一家人围坐吃饭的满足感。",
+        href: url("blog/"),
+    },
+    {
+        icon: "drawing.png",
+        title: "育儿与日常",
+        label: "Family Days",
+        text: "写下孩子的成长片段、童言童语和生活里轻轻发光的时刻。",
+        href: url("notes"),
+    },
+    {
+        icon: "brush.png",
+        title: "工作与成长",
+        label: "Work Journal",
+        text: "整理工程师妈妈的复盘、学习、健身和节奏调整。",
+        href: url("projects"),
+    },
+];
+
+const snapshots = [
+    {
+        title: "本周餐桌",
+        text: "试一个新配方，给家里多一点香气。",
+    },
+    {
+        title: "今日陪伴",
+        text: "把半小时留给孩子，也留给当下的自己。",
+    },
+    {
+        title: "晚间整理",
+        text: "写几行日记，让忙碌的一天轻轻落地。",
+    },
+];
+
+const notes = [
+    "做一顿认真吃的饭",
+    "留一段不被打扰的运动时间",
+    "记录一句孩子今天说过的话",
+];
 ---
 
-<BaseLayout sideBarActiveItemID="home">
-    <!-- 顶部欢迎区 -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>🌱 欢迎来到我的小家</h1>
-            <p class="subtitle">
-                互联网工程师 × 双职工宝妈 × 4岁小宝贝的日常角落
-            </p>
-            <p class="description">
-                在这里，我记录生活中的小确幸：<br>
-                自制面包的香气、健身后的舒畅、和宝贝相处的温暖，<br>
-                以及作为一个普通人努力平衡工作与家庭的点滴。
-            </p>
-            <div class="hero-buttons">
-                <a href="/blog" class="btn-primary">浏览最新文章</a>
-                <a href="/about" class="btn-secondary">了解关于我</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 关于我简版 -->
-    <section class="about">
-        <h2>关于我</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>大家好，我是一个普通的双职工宝妈，也是一枚互联网工程师，家里有个活泼可爱的4岁小宝贝。</p>
-                <p>白天忙工作，晚上回家就是一家四口的温暖小日子。我喜欢周末在厨房尝试自制面包和蛋糕，看着家人吃得开心就觉得满足。健身则是我保持精力的方式，让我在工作和带娃中还能照顾好自己。</p>
-                <p>生活里的我并不完美，也常常手忙脚乱，但我一直在努力寻找平衡：用心工作、享受家庭，同时把日子过得更从容。</p>
-                <p><strong>很高兴在这里遇见你</strong>，希望我们都能把普通日子过成喜欢的样子。</p>
-            </div>
-            <!-- 建议在这里放一张个人照片 -->
-            <img src="/images/me.jpg" alt="我的生活照" class="about-image" />
-        </div>
-    </section>
-
-    <!-- 最新分享 -->
-    <section class="latest">
-        <h2>最新分享</h2>
-        <div class="articles-grid">
-            <!-- 这里可以动态渲染文章，或者先手动放几篇示例 -->
-            <div class="article-card">
-                <img src="/images/bread.jpg" alt="自制面包" />
-                <h3>周末尝试了新配方香蕉面包</h3>
-                <p>4岁宝贝抢着吃，分享详细做法～</p>
-                <a href="#">阅读更多 →</a>
+<BaseLayout
+    sideBarActiveItemID="home"
+    title="有饭有娃有日子 | 首页"
+    description="记录互联网工程师妈妈的家庭日常、成长笔记和生活小确幸。"
+>
+    <div class="home-page">
+        <section class="magazine-cover" aria-labelledby="home-title">
+            <div class="cover-copy">
+                <div class="issue-line">
+                    <span>Our Little Days</span>
+                    <span>Vol. 01</span>
+                </div>
+                <p class="eyebrow">生活手记</p>
+                <h1 id="home-title">有饭，有娃，也有自己的日子</h1>
+                <p class="cover-lead">
+                    一个互联网工程师妈妈的日常杂志：厨房的香气、孩子的笑声、工作后的复盘，以及慢慢找回节奏的每一天。
+                </p>
+                <div class="cover-actions" aria-label="首页主要入口">
+                    <a class="btn-ac cover-primary" href={url("blog/")}>阅读生活记录</a>
+                    <a class="cover-secondary" href={url("personal")}>关于我</a>
+                </div>
             </div>
 
-            <div class="article-card">
-                <img src="/images/fitness.jpg" alt="健身" />
-                <h3>双职工宝妈的健身坚持记录</h3>
-                <p>如何在忙碌中找到属于自己的运动时间</p>
-                <a href="#">阅读更多 →</a>
-            </div>
-        </div>
-    </section>
+            <figure class="cover-photo">
+                <img
+                    src={url("profile.jpg")}
+                    alt="温暖房间里的生活头像"
+                    width="720"
+                    height="720"
+                />
+                <figcaption>
+                    <span>今日便签</span>
+                    <strong>好好吃饭，慢慢生活</strong>
+                </figcaption>
+            </figure>
+        </section>
 
-    <!-- 生活小模块 -->
-    <section class="moments">
-        <h2>最近在过的小日子</h2>
-        <div class="moments-grid">
-            <div class="moment-card">
-                <h3>正在尝试</h3>
-                <p>新面包配方 + 本月健身小目标</p>
+        <section class="quiet-index" aria-label="首页关键词">
+            <span>互联网工程师</span>
+            <span>双职工妈妈</span>
+            <span>四岁小朋友</span>
+            <span>厨房 / 运动 / 写作</span>
+        </section>
+
+        <section class="columns-section" aria-labelledby="columns-title">
+            <div class="section-heading">
+                <p class="section-kicker">Columns</p>
+                <h2 id="columns-title">从这些栏目开始</h2>
             </div>
-            <div class="moment-card">
-                <h3>一句心情</h3>
-                <p>“生活不需要完美，只要有爱、有温度，就已经很好了。”</p>
+
+            <div class="column-grid">
+                {
+                    columns.map((item) => (
+                        <a class="column-card" href={item.href}>
+                            <div class="column-top">
+                                <img src={url(item.icon)} alt="" width="48" height="48" />
+                                <span>{item.label}</span>
+                            </div>
+                            <h3>{item.title}</h3>
+                            <p>{item.text}</p>
+                        </a>
+                    ))
+                }
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="feature-story" aria-labelledby="feature-title">
+            <div class="feature-image">
+                <img src={url("post_img.png")} alt="生活记录配图" width="760" height="480" />
+            </div>
+            <div class="feature-copy">
+                <p class="section-kicker">Feature</p>
+                <h2 id="feature-title">普通日子里的小小秩序感</h2>
+                <p>
+                    白天认真工作，晚上回到家，就是一家人的热闹小宇宙。这里有孩子的成长片段，也有我在做饭、健身和写代码之间寻找节奏的过程。
+                </p>
+                <p>
+                    我喜欢把小事写下来：新配方的香气、一次顺利的训练、一句童言童语、一个终于被整理清楚的问题。它们都让生活变得更具体。
+                </p>
+            </div>
+        </section>
+
+        <section class="snapshots-section hidden" aria-labelledby="snapshots-title">
+            <div class="section-heading">
+                <p class="section-kicker">Snapshots</p>
+                <h2 id="snapshots-title">最近想留住的画面</h2>
+            </div>
+
+            <div class="snapshot-grid">
+                {
+                    snapshots.map((item) => (
+                        <article class="snapshot-card">
+                            <span></span>
+                            <h3>{item.title}</h3>
+                            <p>{item.text}</p>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="notice-board hidden" aria-labelledby="notice-title">
+            <div>
+                <p class="section-kicker">Notice Board</p>
+                <h2 id="notice-title">本周小计划</h2>
+            </div>
+            <ul>
+                {
+                    notes.map((item) => (
+                        <li>
+                            <img src={url("nookmiles.png")} alt="" width="24" height="24" />
+                            <span>{item}</span>
+                        </li>
+                    ))
+                }
+            </ul>
+        </section>
+    </div>
 </BaseLayout>
 
 <style>
-    .hero {
-        text-align: center;
-        padding: 6rem 2rem;
-        background: linear-gradient(to bottom, #f8f4eb, #e8f0e0);
+    .home-page {
+        --mag-serif: "Noto Serif SC Variable", "Noto Serif SC", serif;
+        color: var(--ac-text);
+        display: grid;
+        gap: 3.5rem;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: clip;
+        width: 100%;
     }
-    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-    .subtitle { font-size: 1.4rem; color: #666; margin-bottom: 1.5rem; }
-    .hero-buttons {
-        margin-top: 2rem;
+
+    .magazine-cover {
+        align-items: center;
+        display: grid;
+        gap: 2.75rem;
+        grid-template-columns: minmax(0, 1.04fr) minmax(18rem, 0.96fr);
+        min-width: 0;
+        padding: 1.2rem 0 0;
+    }
+
+    .cover-copy {
+        display: grid;
+        gap: 1.25rem;
+        min-width: 0;
+    }
+
+    .issue-line {
+        align-items: center;
+        border-bottom: 1px solid var(--ac-border);
+        border-top: 1px solid var(--ac-border);
+        color: var(--ac-text-light);
+        display: flex;
+        font-size: 0.78rem;
+        font-weight: 800;
+        justify-content: space-between;
+        letter-spacing: 0;
+        padding: 0.7rem 0;
+        text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .section-kicker {
+        color: var(--ac-primary-dark);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .cover-copy h1,
+    .section-heading h2,
+    .feature-copy h2,
+    .notice-board h2 {
+        color: var(--ac-text-dark);
+        font-family: var(--mag-serif);
+        font-variation-settings: normal;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .cover-copy h1 {
+        font-size: 4.25rem;
+        line-height: 1.08;
+        overflow-wrap: anywhere;
+        text-wrap: balance;
+    }
+
+    .cover-lead {
+        color: var(--ac-text);
+        font-size: 1.08rem;
+        line-height: 2;
+        margin: 0;
+        max-width: 32rem;
+        overflow-wrap: anywhere;
+    }
+
+    .cover-actions {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        padding-top: 0.35rem;
+    }
+
+    .cover-actions a {
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    .cover-primary {
+        min-height: 3rem;
+    }
+
+    .cover-secondary {
+        align-items: center;
+        background: color-mix(in srgb, var(--ac-surface), transparent 16%);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        color: var(--ac-text-dark);
+        display: inline-flex;
+        font-weight: 900;
+        justify-content: center;
+        min-height: 3rem;
+        padding: 0.58rem 1.35rem;
+        text-decoration: none;
+        transition: var(--ac-transition);
+    }
+
+    .cover-secondary:hover {
+        border-color: var(--ac-primary);
+        color: var(--ac-primary-dark);
+        transform: translateY(-1px);
+    }
+
+    .cover-photo {
+        margin: 0;
+        min-width: 0;
+        position: relative;
+    }
+
+    .cover-photo::before {
+        background: var(--ac-primary-light);
+        content: "";
+        height: 5rem;
+        position: absolute;
+        right: -0.8rem;
+        top: -0.8rem;
+        width: 5rem;
+        z-index: 0;
+    }
+
+    .cover-photo img {
+        aspect-ratio: 4 / 5;
+        border: 1px solid var(--ac-border);
+        box-shadow: 0 18px 40px rgba(135, 115, 88, 0.14);
+        box-sizing: border-box;
+        display: block;
+        height: auto;
+        object-fit: cover;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .cover-photo figcaption {
+        background: color-mix(in srgb, var(--ac-surface), transparent 4%);
+        border: 1px solid var(--ac-border);
+        bottom: 1rem;
+        box-shadow: var(--ac-shadow);
+        display: grid;
+        gap: 0.2rem;
+        left: 1rem;
+        max-width: 13rem;
+        padding: 0.75rem 0.9rem;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .cover-photo figcaption span {
+        color: var(--ac-text-light);
+        font-size: 0.75rem;
+        font-weight: 900;
+    }
+
+    .cover-photo figcaption strong {
+        color: var(--ac-text-dark);
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+
+    .quiet-index {
+        border-bottom: 1px solid var(--ac-border);
+        border-top: 1px solid var(--ac-border);
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .quiet-index span {
+        color: var(--ac-text-dark);
+        font-size: 0.92rem;
+        font-weight: 900;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .quiet-index span + span {
+        border-left: 1px solid var(--ac-border);
+    }
+
+    .columns-section,
+    .snapshots-section {
+        display: grid;
+        gap: 1.35rem;
+    }
+
+    .section-heading {
+        align-items: flex-end;
         display: flex;
         gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
+        justify-content: space-between;
     }
-    .btn-primary, .btn-secondary {
-        padding: 0.8rem 2rem;
-        border-radius: 9999px;
+
+    .section-heading h2,
+    .feature-copy h2,
+    .notice-board h2 {
+        font-size: 2rem;
+        line-height: 1.25;
+    }
+
+    .column-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .column-card {
+        background: color-mix(in srgb, var(--ac-surface), transparent 12%);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        color: inherit;
+        display: grid;
+        gap: 1.15rem;
+        min-height: 16rem;
+        min-width: 0;
+        padding: 1.2rem;
         text-decoration: none;
-        font-weight: 500;
+        transition: var(--ac-transition);
     }
-    .btn-primary { background: #4a8f5e; color: white; }
-    .btn-secondary { border: 2px solid #4a8f5e; color: #4a8f5e; }
 
-    .about {
-        padding: 4rem 2rem;
-        max-width: 1000px;
-        margin: 0 auto;
+    .column-card:hover {
+        border-color: var(--ac-primary-light);
+        box-shadow: var(--ac-shadow-hover);
+        transform: translateY(-3px);
     }
-    .about-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+
+    .column-top {
         align-items: center;
-    }
-    .about-image {
-        width: 100%;
-        border-radius: 16px;
+        display: flex;
+        justify-content: space-between;
     }
 
-    .latest, .moments {
-        padding: 4rem 2rem;
-        max-width: 1000px;
-        margin: 0 auto;
+    .column-top img {
+        height: 3rem;
+        width: 3rem;
     }
-    .articles-grid {
+
+    .column-top span {
+        color: var(--ac-text-light);
+        font-size: 0.75rem;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .column-card h3,
+    .snapshot-card h3 {
+        color: var(--ac-text-dark);
+        font-size: 1.15rem;
+        line-height: 1.35;
+        margin: 0;
+    }
+
+    .column-card p,
+    .feature-copy p,
+    .snapshot-card p {
+        line-height: 1.85;
+        margin: 0;
+    }
+
+    .feature-story {
+        align-items: center;
+        border-bottom: 1px solid var(--ac-border);
+        border-top: 1px solid var(--ac-border);
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
+        grid-template-columns: minmax(0, 1.05fr) minmax(16rem, 0.95fr);
+        padding: 2rem 0;
     }
-    .article-card {
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    .feature-image {
+        min-width: 0;
+    }
+
+    .feature-image img {
+        aspect-ratio: 16 / 11;
+        border: 1px solid var(--ac-border);
+        display: block;
+        height: auto;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .feature-copy {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .snapshot-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .snapshot-card {
+        background: var(--ac-surface);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        box-shadow: var(--ac-shadow);
+        display: grid;
+        gap: 0.75rem;
+        min-width: 0;
+        padding: 1.15rem;
+    }
+
+    .snapshot-card span {
+        background: var(--ac-orange);
+        border-radius: 999px;
+        display: block;
+        height: 0.55rem;
+        width: 2.5rem;
+    }
+
+    .snapshot-card:nth-child(2) span {
+        background: var(--ac-primary);
+    }
+
+    .snapshot-card:nth-child(3) span {
+        background: var(--ac-pink);
+    }
+
+    .notice-board {
+        align-items: flex-start;
+        background:
+            linear-gradient(135deg, rgba(255, 241, 118, 0.28), transparent 48%),
+            var(--ac-cream-dark);
+        border: 1px dashed var(--ac-wood);
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: minmax(12rem, 0.75fr) minmax(0, 1.25fr);
+        padding: 1.5rem;
+    }
+
+    .notice-board ul {
+        display: grid;
+        gap: 0.8rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .notice-board li {
+        align-items: center;
+        background: color-mix(in srgb, var(--ac-surface), transparent 8%);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        display: flex;
+        gap: 0.75rem;
+        min-width: 0;
+        padding: 0.75rem 0.9rem;
+    }
+
+    .notice-board li span {
+        color: var(--ac-text-dark);
+        font-weight: 800;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    :global([data-theme="night"]) .cover-photo::before {
+        background: var(--ac-primary-dark);
+    }
+
+    :global([data-theme="night"]) .cover-photo img,
+    :global([data-theme="night"]) .feature-image img {
+        border-color: rgba(226, 214, 200, 0.18);
+    }
+
+    @media (max-width: 860px) {
+        .magazine-cover,
+        .feature-story,
+        .notice-board {
+            grid-template-columns: 1fr;
+        }
+
+        .cover-copy h1 {
+            font-size: 3rem;
+        }
+
+        .quiet-index,
+        .column-grid,
+        .snapshot-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .quiet-index span + span {
+            border-left: 0;
+            border-top: 1px solid var(--ac-border);
+        }
+    }
+
+    @media (max-width: 540px) {
+        :global(main.p-6) {
+            box-sizing: border-box;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: calc(100vw - 2rem) !important;
+            overflow-x: hidden;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            width: calc(100vw - 2rem) !important;
+        }
+
+        .home-page {
+            gap: 2.5rem;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .magazine-cover {
+            gap: 1.6rem;
+            padding-top: 0.4rem;
+        }
+
+        .issue-line {
+            font-size: 0.72rem;
+            padding: 0.6rem 0;
+        }
+
+        .cover-copy h1 {
+            font-size: 2.3rem;
+            line-height: 1.16;
+            max-width: 8.5em;
+        }
+
+        .cover-lead {
+            font-size: 0.98rem;
+            line-height: 1.9;
+            max-width: 100%;
+            white-space: normal;
+            word-break: break-all;
+        }
+
+        .cover-actions,
+        .cover-actions a {
+            width: 100%;
+        }
+
+        .cover-photo::before {
+            height: 3.5rem;
+            right: -0.35rem;
+            top: -0.35rem;
+            width: 3.5rem;
+        }
+
+        .section-heading {
+            align-items: flex-start;
+            display: grid;
+        }
+
+        .section-heading h2,
+        .feature-copy h2,
+        .notice-board h2 {
+            font-size: 1.65rem;
+        }
+
+        .column-card {
+            min-height: 13rem;
+        }
+
+        .feature-story {
+            padding: 1.5rem 0;
+        }
+
+        .notice-board {
+            padding: 1rem;
+        }
     }
 </style>

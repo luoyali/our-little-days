@@ -1,55 +1,57 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
 import { Image } from "astro:assets";
-import { AUTHOR_INITIAL, url } from "src/config";
+import { AUTHOR_NAME, url } from "../config";
+import "@fontsource-variable/noto-serif-sc";
 
-const aboutTags = ["双职工宝妈", "互联网工程师", "4岁宝妈", "厨房爱好者", "健身坚持者"];
+const identityTags = ["双职工妈妈", "互联网工程师", "4岁小朋友的妈妈", "厨房爱好者", "健身坚持者"];
 
-const aboutParagraphs = [
-    "大家好，我是一个普通的双职工宝妈，也是一枚互联网工程师，家里有个活泼可爱的4岁小宝贝。",
-    "白天忙工作，晚上回家就是一家三口的温暖小日子。我喜欢周末在厨房尝试自制面包和蛋糕，看着家人吃得开心就觉得满足。健身则是我保持精力的方式，让我在工作和带娃中还能照顾好自己。",
-    "生活里的我并不完美，也常常手忙脚乱，但我一直在努力寻找平衡：用心工作、享受家庭，同时把日子过得更从容。",
-    "很高兴在这里遇见你，希望我们都能把普通日子过成喜欢的样子。",
+const lifeCards = [
+    {
+        icon: "nookwallet.png",
+        title: "白天",
+        text: "写代码、做需求、解决问题，在项目和协作里保持清醒。",
+    },
+    {
+        icon: "photos.png",
+        title: "傍晚",
+        text: "回到家里，陪孩子、做饭、收拾日常，把生活重新接住。",
+    },
+    {
+        icon: "leaf_dark.png",
+        title: "给自己",
+        text: "留一点运动、阅读和记录的时间，让精力慢慢恢复。",
+    },
+];
+
+const noteCards = [
+    "把复杂的问题拆小一点",
+    "认真吃饭，也认真生活",
+    "允许日子有点乱，也继续往前走",
 ];
 ---
 
 <BaseLayout
-    title={AUTHOR_INITIAL + " | Personal"}
+    title={`${AUTHOR_NAME} | 关于我`}
+    description="关于一个互联网工程师妈妈的生活、工作、育儿和日常记录。"
     sideBarActiveItemID="personal"
 >
-    <!-- TODO change color according to theme
-    <div class="w-[10rem] mt-5 mb-6">
-        <Image
-            class="fill-current rounded-ac-md"
-            format="webp"
-            width={300}
-            height={300}
-            src={url('favicon.svg')}
-            alt="icon"
-        />
-    </div> -->
-    <section class="mt-5 mb-12">
-        <div class="flex flex-col gap-6 md:flex-row md:items-center">
-            <div class="w-28 shrink-0 md:w-36">
-                <Image
-                    class="fill-current rounded-ac-lg shadow-ac"
-                    format="webp"
-                    width={300}
-                    height={300}
-                    src={url('favicon.svg')}
-                    alt="个人头像"
-                />
-            </div>
-
-            <div class="grow">
-                <div class="mb-4">
-                    <div class="text-3xl w-full font-bold">关于我</div>
-                    <div class="mt-2 h-1 w-20 rounded-full bg-ac-primary"></div>
+    <div class="about-page">
+        <section class="about-cover" aria-labelledby="about-title">
+            <div class="cover-copy">
+                <div class="issue-line">
+                    <span>Personal Profile</span>
+                    <span>Our Little Days</span>
                 </div>
-
-                <div class="flex flex-wrap gap-2">
+                <p class="eyebrow">关于我</p>
+                <h1 id="about-title">在工作、家庭和自己之间，慢慢找到节奏</h1>
+                <p class="cover-lead">
+                    你好，我是一个普通的双职工妈妈，也是一枚互联网工程师。家里有个活泼可爱的4岁小朋友，生活常常忙乱，也常常可爱。
+                </p>
+                <div class="tag-list" aria-label="个人关键词">
                     {
-                        aboutTags.map((tag) => (
+                        identityTags.map((tag) => (
                             <span class="badge badge-outline border-ac-primary text-ac-text">
                                 {tag}
                             </span>
@@ -57,108 +59,487 @@ const aboutParagraphs = [
                     }
                 </div>
             </div>
-        </div>
 
-        <div class="mt-8 rounded-ac-lg bg-base-100 p-6 shadow-ac border-l-4 border-ac-primary md:p-8">
-            <div class="grid gap-5 text-base leading-8 text-ac-text md:text-lg">
+            <figure class="portrait-card hidden">
+                <Image
+                    format="webp"
+                    width={720}
+                    height={720}
+                    src={url("profile.jpg")}
+                    alt="个人头像"
+                />
+                <figcaption>
+                    <span>Daily note</span>
+                    <strong>有饭，有娃，也有自己的日子</strong>
+                </figcaption>
+            </figure>
+        </section>
+
+        <section class="intro-panel" aria-labelledby="intro-title">
+            <div>
+                <p class="section-kicker">Story</p>
+                <h2 id="intro-title">我想把普通日子写具体</h2>
+            </div>
+            <div class="intro-copy">
+                <p>
+                    白天忙工作，晚上回家就是一家三口的温暖小日子。我喜欢周末在厨房尝试自制面包和蛋糕，看着家人吃得开心，就觉得一天有了很踏实的落点。
+                </p>
+                <p>
+                    健身是我保持精力的方式，写博客是我整理生活的方式。这里会记录育儿、工作、做饭、运动，也记录一个普通人努力把生活过顺的过程。
+                </p>
+            </div>
+        </section>
+
+        <section class="rhythm-section" aria-labelledby="rhythm-title">
+            <div class="section-heading">
+                <p class="section-kicker">Rhythm</p>
+                <h2 id="rhythm-title">我的一天常常这样展开</h2>
+            </div>
+
+            <div class="life-grid">
                 {
-                    aboutParagraphs.map((paragraph, index) => (
-                        <p class={index === aboutParagraphs.length - 1 ? "font-bold" : ""}>
-                            {paragraph}
-                        </p>
+                    lifeCards.map((item) => (
+                        <article class="life-card">
+                            <img src={url(item.icon)} alt="" width="44" height="44" />
+                            <h3>{item.title}</h3>
+                            <p>{item.text}</p>
+                        </article>
                     ))
                 }
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- <div class="mb-5">
-        <div class="text-3xl w-full font-bold">Education</div>
+        <section class="timeline-section" aria-labelledby="timeline-title">
+            <div class="section-heading">
+                <p class="section-kicker">Timeline</p>
+                <h2 id="timeline-title">正在经历的角色</h2>
+            </div>
+
+            <div class="timeline-list">
+                <TimeLineElement title="互联网工程师" subtitle="工作里的我">
+                    关注清晰表达、稳定交付和持续学习。解决问题时喜欢先把结构梳理出来，再一点点推进。
+                </TimeLineElement>
+                <TimeLineElement title="双职工妈妈" subtitle="家庭里的我">
+                    在陪伴、家务、工作和自我照顾之间调整节奏。每天都有新的挑战，也有新的小惊喜。
+                </TimeLineElement>
+                <TimeLineElement title="生活记录者" subtitle="博客里的我">
+                    把做饭、运动、育儿和一些细碎感受写下来，给现在的自己一个出口，也给未来留一份回看。
+                </TimeLineElement>
+            </div>
+        </section>
+
+        <section class="closing-card" aria-label="结束语">
+            <p>很高兴在这里遇见你。希望我们都能把普通日子过成自己喜欢的样子。</p>
+            <a class="btn-ac" href={url("blog/")}>去看生活记录</a>
+        </section>
     </div>
-
-    <div class="time-line-container grid gap-4 mb-10">
-        <TimeLineElement
-            title="Title Name"
-            subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-        />
-        <TimeLineElement
-            title="Title Name"
-            subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-        />
-    </div>
-
-    <div class="mb-5">
-        <div class="text-3xl w-full font-bold">Experience</div>
-    </div>
-
-    <div class="time-line-container mb-10">
-        <TimeLineElement
-            title="Job Title at Project or Company Name"
-            subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-        >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident.
-        </TimeLineElement>
-        <TimeLineElement
-            title="Job Title at Project or Company Name"
-            subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-        >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident.
-        </TimeLineElement>
-        <TimeLineElement
-            title="Job Title at Project or Company Name"
-            subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-        >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident.
-        </TimeLineElement>
-    </div>
-
-    <div class="mb-5">
-        <div class="text-3xl w-full font-bold">Certifications</div>
-    </div>
-
-    <ul class="list-disc mx-6 mb-10 grid gap-2">
-        <li>
-            <a href="#" target="_blank"> Certification Name (with link)</a>
-        </li>
-        <li>
-            <a href="#" target="_blank"> Certification Name (with link)</a>
-        </li>
-    </ul>
-
-    <div class="mb-5">
-        <div class="text-3xl w-full font-bold">Skills</div>
-    </div>
-
-    <ul class="list-disc md:columns-5 columns-2 mx-6">
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-        <li>Skill Name</li>
-    </ul> -->
 </BaseLayout>
+
+<style>
+    .about-page {
+        --mag-serif: "Noto Serif SC Variable", "Noto Serif SC", serif;
+        color: var(--ac-text);
+        display: grid;
+        gap: 3.25rem;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: clip;
+        width: 100%;
+    }
+
+    .about-cover {
+        align-items: center;
+        //display: grid;
+        //gap: 2.5rem;
+        //grid-template-columns: minmax(0, 1.08fr) minmax(17rem, 0.92fr);
+        padding-top: 1.2rem;
+    }
+
+    .cover-copy {
+        display: grid;
+        gap: 1.15rem;
+        min-width: 0;
+    }
+
+    .issue-line {
+        align-items: center;
+        border-bottom: 1px solid var(--ac-border);
+        border-top: 1px solid var(--ac-border);
+        color: var(--ac-text-light);
+        display: flex;
+        font-size: 0.78rem;
+        font-weight: 800;
+        justify-content: space-between;
+        letter-spacing: 0;
+        padding: 0.7rem 0;
+        text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .section-kicker {
+        color: var(--ac-primary-dark);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .cover-copy h1,
+    .intro-panel h2,
+    .section-heading h2,
+    .notice-board h2 {
+        color: var(--ac-text-dark);
+        font-family: var(--mag-serif);
+        font-variation-settings: normal;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .cover-copy h1 {
+        font-size: 3.65rem;
+        line-height: 1.1;
+        overflow-wrap: anywhere;
+        text-wrap: balance;
+    }
+
+    .cover-lead {
+        font-size: 1.06rem;
+        line-height: 1.95;
+        margin: 0;
+        max-width: 34rem;
+        overflow-wrap: anywhere;
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        min-width: 0;
+    }
+
+    .tag-list span {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        white-space: normal;
+    }
+
+    .portrait-card {
+        margin: 0;
+        min-width: 0;
+        position: relative;
+    }
+
+    .portrait-card::before {
+        background: var(--ac-primary-light);
+        content: "";
+        height: 5rem;
+        position: absolute;
+        right: -0.8rem;
+        top: -0.8rem;
+        width: 5rem;
+        z-index: 0;
+    }
+
+    .portrait-card :global(img) {
+        aspect-ratio: 4 / 5;
+        border: 1px solid var(--ac-border);
+        box-shadow: 0 18px 40px rgba(135, 115, 88, 0.14);
+        box-sizing: border-box;
+        display: block;
+        height: auto;
+        object-fit: cover;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .portrait-card figcaption {
+        background: color-mix(in srgb, var(--ac-surface), transparent 4%);
+        border: 1px solid var(--ac-border);
+        bottom: 1rem;
+        box-shadow: var(--ac-shadow);
+        display: grid;
+        gap: 0.2rem;
+        left: 1rem;
+        max-width: 13rem;
+        padding: 0.75rem 0.9rem;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .portrait-card figcaption span {
+        color: var(--ac-text-light);
+        font-size: 0.75rem;
+        font-weight: 900;
+    }
+
+    .portrait-card figcaption strong {
+        color: var(--ac-text-dark);
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+
+    .intro-panel {
+        align-items: flex-start;
+        border-bottom: 1px solid var(--ac-border);
+        border-top: 1px solid var(--ac-border);
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: minmax(13rem, 0.75fr) minmax(0, 1.25fr);
+        padding: 2rem 0;
+    }
+
+    .intro-panel h2,
+    .section-heading h2,
+    .notice-board h2 {
+        font-size: 2rem;
+        line-height: 1.25;
+    }
+
+    .intro-copy {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .intro-copy p,
+    .life-card p,
+    .closing-card p {
+        line-height: 1.85;
+        margin: 0;
+    }
+
+    .rhythm-section,
+    .timeline-section {
+        display: grid;
+        gap: 1.35rem;
+    }
+
+    .section-heading {
+        align-items: flex-end;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+    }
+
+    .life-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .life-card {
+        background: color-mix(in srgb, var(--ac-surface), transparent 10%);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        box-shadow: var(--ac-shadow);
+        display: grid;
+        gap: 0.8rem;
+        min-height: 13.5rem;
+        min-width: 0;
+        padding: 1.15rem;
+    }
+
+    .life-card img {
+        height: 2.75rem;
+        width: 2.75rem;
+    }
+
+    .life-card h3 {
+        color: var(--ac-text-dark);
+        font-size: 1.15rem;
+        margin: 0;
+    }
+
+    .timeline-list {
+        background: var(--ac-surface);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        box-shadow: var(--ac-shadow);
+        padding: 1.25rem;
+    }
+
+    .notice-board {
+        align-items: flex-start;
+        background:
+            linear-gradient(135deg, rgba(255, 241, 118, 0.28), transparent 48%),
+            var(--ac-cream-dark);
+        border: 1px dashed var(--ac-wood);
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: minmax(12rem, 0.75fr) minmax(0, 1.25fr);
+        padding: 1.5rem;
+    }
+
+    .notice-board ul {
+        display: grid;
+        gap: 0.8rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .notice-board li {
+        align-items: center;
+        background: color-mix(in srgb, var(--ac-surface), transparent 8%);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        display: flex;
+        gap: 0.75rem;
+        min-width: 0;
+        padding: 0.75rem 0.9rem;
+    }
+
+    .notice-board li span {
+        color: var(--ac-text-dark);
+        font-weight: 800;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .closing-card {
+        align-items: center;
+        background: var(--ac-surface);
+        border: 1px solid var(--ac-border);
+        border-radius: 8px;
+        box-shadow: var(--ac-shadow);
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        padding: 1.25rem;
+    }
+
+    .closing-card p {
+        color: var(--ac-text-dark);
+        font-weight: 800;
+    }
+
+    .closing-card a {
+        flex: 0 0 auto;
+        text-decoration: none;
+    }
+
+    :global([data-theme="night"]) .portrait-card::before {
+        background: var(--ac-primary-dark);
+    }
+
+    :global([data-theme="night"]) .portrait-card :global(img) {
+        border-color: rgba(226, 214, 200, 0.18);
+    }
+
+    @media (max-width: 860px) {
+        .about-cover,
+        .intro-panel,
+        .notice-board {
+            grid-template-columns: 1fr;
+        }
+
+        .cover-copy h1 {
+            font-size: 3rem;
+        }
+
+        .life-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 540px) {
+        :global(main.p-6) {
+            box-sizing: border-box;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: calc(100vw - 2rem) !important;
+            overflow-x: hidden;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            width: calc(100vw - 2rem) !important;
+        }
+
+        .about-page {
+            gap: 2.5rem;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .about-cover {
+            gap: 1.6rem;
+            padding-top: 0.4rem;
+        }
+
+        .issue-line {
+            font-size: 0.72rem;
+            padding: 0.6rem 0;
+        }
+
+        .cover-copy h1 {
+            font-size: 2.25rem;
+            line-height: 1.16;
+            max-width: 100%;
+            word-break: break-all;
+        }
+
+        .cover-lead {
+            font-size: 0.98rem;
+            line-height: 1.9;
+            max-width: 100%;
+            white-space: normal;
+            word-break: break-all;
+        }
+
+        .tag-list {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .tag-list span {
+            justify-content: center;
+            min-height: 1.8rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .portrait-card {
+            overflow: hidden;
+        }
+
+        .portrait-card::before {
+            right: 0;
+        }
+
+        .portrait-card::before {
+            height: 3.5rem;
+            top: -0.35rem;
+            width: 3.5rem;
+        }
+
+        .section-heading,
+        .closing-card {
+            align-items: flex-start;
+            display: grid;
+        }
+
+        .intro-panel h2,
+        .section-heading h2,
+        .notice-board h2 {
+            font-size: 1.65rem;
+        }
+
+        .intro-panel {
+            padding: 1.5rem 0;
+        }
+
+        .life-card {
+            min-height: 12rem;
+        }
+
+        .notice-board,
+        .timeline-list,
+        .closing-card {
+            padding: 1rem;
+        }
+
+        .closing-card a {
+            width: 100%;
+        }
+    }
+</style>
